@@ -1,3 +1,7 @@
-import { createRuller } from "./ruller";
+import App from './App.svelte'
 
-createRuller(document.querySelector<HTMLDivElement>('.ruller')!)
+const app = new App({
+  target: document.getElementById('app')
+})
+
+export default app
