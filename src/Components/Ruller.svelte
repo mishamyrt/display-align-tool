@@ -8,9 +8,7 @@
         : 0;
 
     const columns = Array(count)
-    let shift = 0
     for (let i = 0; i < count; i++) {
-        shift = i
         if (i === center) {
             columns[i] = 1
         } else if (i > center) {
