@@ -1,4 +1,5 @@
 set toolUrl to "https://mishamyrt.github.io/display-align-tool/"
+set topUrl to toolUrl & "?width=64&count=13"
 
 tell application "Safari" to activate
 tell application "System Events"
@@ -19,7 +20,7 @@ tell application "System Events"
 	end tell
 end tell
 tell application "Safari"
-	tell window 1 to set properties of current tab to {URL:toolUrl}
+	tell window 1 to set properties of current tab to {URL:topUrl}
 	tell window 2 to set properties of current tab to {URL:toolUrl}
 end tell
 delay 0.5
