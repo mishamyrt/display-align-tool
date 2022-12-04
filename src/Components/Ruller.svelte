@@ -1,8 +1,10 @@
 <script lang="ts">
-    export let count = 7;
-    export let width = 100;
+    import { COLUMNS_DEFAULT, WIDTH_DEFAULT } from "../App.constants";
 
-    let columns = Array(count)
+    export let count = COLUMNS_DEFAULT;
+    export let width = WIDTH_DEFAULT;
+
+    let columns: number[]
     $: {
         const center = Math.floor(count / 2)
         const step = center > 0
