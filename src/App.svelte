@@ -3,21 +3,12 @@
     import NewTabButton from './Components/NewTabButton.svelte';
     import Ruller from './Components/Ruller.svelte'
     import SizeSnack from './Components/SizeSnack.svelte';
+    import { COLUMNS_DEFAULT, WIDTH_DEFAULT } from './App.constants';
 
-    let width = 100
-    let count = 7;
-    let snackVisible = false;
-    let snackTimeout = 0
+    let snack: SizeSnack
 
-    function showSnack() {
-        snackVisible = true
-        if (snackTimeout) {
-            window.clearTimeout(snackTimeout)
-        }
-        snackTimeout = window.setTimeout(() => {
-            snackVisible = false
-        }, 1000)
-    }
+    let width = WIDTH_DEFAULT
+    let count = COLUMNS_DEFAULT;
 
     function handleKeys(e: KeyboardEvent) {
         switch (e.code) {
@@ -25,13 +16,13 @@
                 if (width > 5) {
                     width -= 1
                 }
-                showSnack()
+                snack.show()
                 break
             case 'ArrowUp':
                 if (width < 300) {
                     width += 1
                 }
-                showSnack()
+                snack.show()
                 break
             case 'ArrowLeft':
                 if (count > 3) {
@@ -44,14 +35,24 @@
                 }
                 break
         }
-        console.log(e, { width, count })
     }
+
+    onMount(() => {
+        // Loads values from URL
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('width')) {
+            width = parseInt(params.get('width'), 10)
+        }
+        if (params.has('count')) {
+            count = parseInt(params.get('count'), 10)
+        }
+    })
 
     onMount(() => document.addEventListener('keydown', handleKeys))
     onDestroy(() => document.removeEventListener('keydown', handleKeys))
 </script>
 <main>
     <Ruller bind:width bind:count />
-    <SizeSnack bind:width bind:visible={snackVisible} />
+    <SizeSnack bind:this={snack} bind:value={width} />
     <NewTabButton />
 </main>

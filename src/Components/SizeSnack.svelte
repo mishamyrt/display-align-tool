@@ -1,13 +1,27 @@
 <script lang="ts">
-    export let width: number
-    export let visible: boolean = false
-    const initialWidth = 100
+    import { WIDTH_DEFAULT } from "../App.constants";
 
-    $: relativeSize = Math.floor(100 - (width - initialWidth))
+    export let value: number
+    export let timeout = 1000
+
+    let visible = false
+    let timeoutId = 0
+
+    export function show() {
+        visible = true
+        if (timeoutId) {
+            window.clearTimeout(timeoutId)
+        }
+        timeoutId = window.setTimeout(() => {
+            visible = false
+        }, timeout)
+    }
+
+    $: percent = Math.floor(100 - (value - WIDTH_DEFAULT))
 </script>
 
 <div class="container">
-    <div class="snack {visible ? "__visible" : ""}">{relativeSize}%</div>
+    <div class="snack {visible ? "__visible" : ""}">{percent}%</div>
 </div>
 
 <style lang="scss">
