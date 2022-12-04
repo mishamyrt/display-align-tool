@@ -3,7 +3,7 @@
     export let visible: boolean = false
     const initialWidth = 100
 
-    $: relativeSize = Math.floor((width / initialWidth) * 100)
+    $: relativeSize = Math.floor(100 - (width - initialWidth))
 </script>
 
 <div class="container">
