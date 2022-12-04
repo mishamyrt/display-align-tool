@@ -22,3 +22,7 @@ tell application "Safari"
 	tell window 1 to set properties of current tab to {URL:toolUrl}
 	tell window 2 to set properties of current tab to {URL:toolUrl}
 end tell
+delay 0.5
+tell application "System Events"
+    key code 53
+end tell
