@@ -2,19 +2,21 @@
     export let count = 7;
     export let width = 100;
 
-    const center = Math.floor(count / 2)
-    const step = center > 0
-        ? 1 / (center + 1)
-        : 0;
-
-    const columns = Array(count)
-    for (let i = 0; i < count; i++) {
-        if (i === center) {
-            columns[i] = 1
-        } else if (i > center) {
-            columns[i] = (count - i) * step
-        } else {
-            columns[i] = (i + 1) * step
+    let columns = Array(count)
+    $: {
+        const center = Math.floor(count / 2)
+        const step = center > 0
+            ? 1 / (center + 1)
+            : 0;
+        columns = Array(count)
+        for (let i = 0; i < count; i++) {
+            if (i === center) {
+                columns[i] = 1
+            } else if (i > center) {
+                columns[i] = (count - i) * step
+            } else {
+                columns[i] = (i + 1) * step
+            }
         }
     }
 
@@ -32,7 +34,7 @@
         height: 100vh;
         display: flex;
         justify-content: center;
-        gap: 2cm;
+        gap: var(--width);
         padding: 0 3cm;
     }
 
